@@ -1,0 +1,73 @@
+class Agenda:
+    def __init__(self):
+        self.contactos = {}
+
+    def agregar_contacto(self):
+        nombre = input("Introduce el nombre del contacto: ")
+        if nombre in self.contactos:
+            print(f"El contacto {nombre} ya existe.")
+        else:
+            telefono = input("Introduce el teléfono del contacto: ")
+            correo = input("Introduce el correo electrónico del contacto: ")
+            self.contactos[nombre] = {'Telefono': telefono, 'Correo': correo}
+            print(f"Contacto {nombre} agregado exitosamente.")
+
+    def eliminar_contacto(self):
+        
+        nombre = input("Introduce el nombre del contacto a eliminar: ")
+        if nombre in self.contactos:
+            del self.contactos[nombre]
+            print(f"Contacto {nombre} eliminado exitosamente.")
+        else:
+            print(f"No se encontró el contacto {nombre}.")
+
+    def buscar_contacto(self):
+        
+        nombre = input("Introduce el nombre del contacto a buscar: ")
+        if nombre in self.contactos:
+            contacto = self.contactos[nombre]
+            print(f"Contacto encontrado: {nombre}")
+            print(f"Teléfono: {contacto['Telefono']}")
+            print(f"Correo: {contacto['Correo']}")
+        else:
+            print(f"No se encontró el contacto {nombre}.")
+
+    def mostrar_agenda(self):
+       
+        if not self.contactos:
+            print("La agenda está vacía.")
+        else:
+            print("Agenda de Contactos:")
+            for nombre, datos in self.contactos.items():
+                print(f"Nombre: {nombre}, Teléfono: {datos['Telefono']}, Correo: {datos['Correo']}")
+
+
+def menu():
+    agenda = Agenda()
+
+    while True:
+        print("\nMenú de la Agenda:")
+        print("1. Agregar contacto")
+        print("2. Eliminar contacto")
+        print("3. Buscar contacto")
+        print("4. Mostrar todos los contactos")
+        print("5. Salir")
+        
+        opcion = input("Elige una opción (1-5): ")
+
+        if opcion == '1':
+            agenda.agregar_contacto()
+        elif opcion == '2':
+            agenda.eliminar_contacto()
+        elif opcion == '3':
+            agenda.buscar_contacto()
+        elif opcion == '4':
+            agenda.mostrar_agenda()
+        elif opcion == '5':
+            print("Saliendo de la agenda...")
+            break
+        else:
+            print("Opción no válida. Por favor elige entre 1 y 5.")
+
+
+menu()
